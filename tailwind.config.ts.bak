@@ -1,0 +1,84 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        navy: {
+          50: "#e8ecf3",
+          100: "#c5d0e0",
+          200: "#9aafc9",
+          300: "#6f8eb2",
+          400: "#4d729f",
+          500: "#2b578c",
+          600: "#1e3f6b",
+          700: "#152e51",
+          800: "#0d1f38",
+          900: "#0B1F3A",
+          950: "#070f1d",
+        },
+        gold: {
+          50: "#fdf8ec",
+          100: "#f9edcc",
+          200: "#f2d98a",
+          300: "#ecc54a",
+          400: "#C9A84C",
+          500: "#b8912a",
+          600: "#9a7420",
+          700: "#7b5a1a",
+          800: "#5e4316",
+          900: "#3f2d10",
+        },
+        cream: {
+          50: "#FAFAF8",
+          100: "#F5F5F0",
+          200: "#EDEDEA",
+        },
+      },
+      fontFamily: {
+        serif: ["var(--font-playfair)", "Georgia", "serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      animation: {
+        "fade-up": "fadeUp 0.6s ease-out forwards",
+        "fade-in": "fadeIn 0.8s ease-out forwards",
+        "slide-right": "slideRight 0.6s ease-out forwards",
+        shimmer: "shimmer 2s linear infinite",
+      },
+      keyframes: {
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideRight: {
+          "0%": { opacity: "0", transform: "translateX(-30px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+      },
+      backgroundImage: {
+        "gold-gradient":
+          "linear-gradient(135deg, #C9A84C 0%, #f2d98a 50%, #C9A84C 100%)",
+        "navy-gradient":
+          "linear-gradient(135deg, #0B1F3A 0%, #1e3f6b 100%)",
+        "hero-gradient":
+          "linear-gradient(to right, rgba(11,31,58,0.85) 0%, rgba(11,31,58,0.4) 60%, rgba(11,31,58,0.1) 100%)",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
