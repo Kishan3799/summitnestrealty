@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -39,20 +39,33 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled || !isHome
-            ? "bg-navy-900/98 backdrop-blur-md shadow-2xl border-b border-gold-400/10"
+            ? "backdrop-blur-xl border-b"
             : "bg-transparent"
         }`}
+        style={
+          scrolled || !isHome
+            ? {
+                backgroundColor: "rgba(5, 5, 5, 0.92)",
+                borderColor: "rgba(42, 37, 33, 0.8)",
+              }
+            : {}
+        }
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-gold-gradient rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                style={{
+                  background: "linear-gradient(135deg, #B8895E 0%, #D8B07A 100%)",
+                }}
+              >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   className="w-6 h-6"
-                  stroke="#0B1F3A"
+                  stroke="#050505"
                   strokeWidth="2"
                 >
                   <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -60,10 +73,16 @@ export default function Navbar() {
                 </svg>
               </div>
               <div>
-                <span className="font-serif text-xl font-bold text-white leading-tight block">
+                <span
+                  className="font-display text-xl font-bold leading-tight block"
+                  style={{ color: "#F5F1EA" }}
+                >
                   SummitNest
                 </span>
-                <span className="text-gold-400 text-xs tracking-[0.2em] uppercase font-medium">
+                <span
+                  className="text-xs tracking-[0.2em] uppercase font-medium font-body"
+                  style={{ color: "#B8895E" }}
+                >
                   Realty
                 </span>
               </div>
@@ -75,11 +94,15 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`nav-link text-sm font-medium transition-colors duration-200 ${
-                    pathname === link.href
-                      ? "text-gold-400 active"
-                      : "text-white/90 hover:text-gold-400"
+                  className={`nav-link text-sm font-medium font-body transition-colors duration-200 ${
+                    pathname === link.href ? "active" : ""
                   }`}
+                  style={{
+                    color:
+                      pathname === link.href
+                        ? "#B8895E"
+                        : "rgba(245, 241, 234, 0.8)",
+                  }}
                 >
                   {link.label}
                 </Link>
@@ -90,7 +113,14 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <a
                 href="tel:+15125550189"
-                className="hidden md:flex items-center gap-2 text-white/80 hover:text-gold-400 text-sm transition-colors duration-200"
+                className="hidden md:flex items-center gap-2 text-sm font-body transition-colors duration-200"
+                style={{ color: "rgba(245, 241, 234, 0.6)" }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#B8895E")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "rgba(245, 241, 234, 0.6)")
+                }
               >
                 <Phone className="w-4 h-4" />
                 <span className="hidden xl:inline">+1 (512) 555-0189</span>
@@ -98,7 +128,12 @@ export default function Navbar() {
 
               <Link
                 href="/contact"
-                className="hidden md:inline-flex items-center gap-2 bg-gold-gradient text-navy-900 px-5 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-gold-400/30 hover:scale-105 transition-all duration-300"
+                className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm font-body transition-all duration-300 hover:scale-105"
+                style={{
+                  background: "linear-gradient(90deg, #5A4340 0%, #B8895E 100%)",
+                  color: "#F5F1EA",
+                  boxShadow: "0 4px 20px rgba(184, 137, 94, 0.25)",
+                }}
               >
                 Book Consultation
               </Link>
@@ -106,7 +141,8 @@ export default function Navbar() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="lg:hidden p-2 rounded-lg transition-colors"
+                style={{ color: "#F5F1EA" }}
                 aria-label="Toggle menu"
               >
                 {mobileOpen ? (
@@ -127,7 +163,11 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden bg-navy-900/98 backdrop-blur-md border-t border-gold-400/10 overflow-hidden"
+              className="lg:hidden backdrop-blur-xl border-t overflow-hidden"
+              style={{
+                backgroundColor: "rgba(5, 5, 5, 0.97)",
+                borderColor: "rgba(42, 37, 33, 0.8)",
+              }}
             >
               <div className="px-4 py-6 space-y-1">
                 {navLinks.map((link, i) => (
@@ -139,20 +179,34 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
-                        pathname === link.href
-                          ? "bg-gold-400/10 text-gold-400"
-                          : "text-white/90 hover:bg-white/5 hover:text-gold-400"
-                      }`}
+                      className="block px-4 py-3 rounded-xl text-base font-medium font-body transition-all duration-200"
+                      style={{
+                        color:
+                          pathname === link.href
+                            ? "#B8895E"
+                            : "rgba(245, 241, 234, 0.85)",
+                        backgroundColor:
+                          pathname === link.href
+                            ? "rgba(184, 137, 94, 0.1)"
+                            : "transparent",
+                      }}
                     >
                       {link.label}
                     </Link>
                   </motion.div>
                 ))}
-                <div className="pt-4 border-t border-white/10 mt-4">
+                <div
+                  className="pt-4 border-t mt-4"
+                  style={{ borderColor: "rgba(42, 37, 33, 0.6)" }}
+                >
                   <Link
                     href="/contact"
-                    className="block text-center bg-gold-gradient text-navy-900 px-6 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-gold-400/30 transition-all duration-300"
+                    className="block text-center px-6 py-3 rounded-full font-semibold font-body transition-all duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #5A4340 0%, #B8895E 100%)",
+                      color: "#F5F1EA",
+                    }}
                   >
                     Book Consultation
                   </Link>

@@ -30,7 +30,7 @@ export default function StatCounter({
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * value));
 
       if (progress < 1) {
@@ -47,7 +47,13 @@ export default function StatCounter({
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="font-serif text-4xl md:text-5xl font-bold text-gold-400"
+        className="font-display text-4xl md:text-5xl font-bold"
+        style={{
+          background: "linear-gradient(135deg, #D8B07A, #f1bc8d, #B8895E)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
       >
         {prefix}
         {count.toLocaleString()}
@@ -57,7 +63,8 @@ export default function StatCounter({
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-white/70 text-sm mt-2 font-medium uppercase tracking-wider"
+        className="font-body text-sm mt-2 font-medium uppercase tracking-wider"
+        style={{ color: "rgba(182, 173, 162, 0.65)" }}
       >
         {label}
       </motion.p>
